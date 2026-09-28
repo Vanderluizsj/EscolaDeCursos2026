@@ -5,6 +5,14 @@ using EscolaDeCursos.WebApp.Modulos.ModuloAluno.Infraestrutura;
 using EscolaDeCursos.WebApp.Modulos.ModuloInstrutor.Infraestrutura;
 using Microsoft.EntityFrameworkCore;
 using EscolaDeCursos.WebApp.Compartilhado.Infraestrutura.Orm;
+using EscolaDeCursos.WebApp.Modulos.ModuloCurso.Dominio;
+using EscolaDeCursos.WebApp.Modulos.ModuloTurma.Dominio;
+using EscolaDeCursos.WebApp.Modulos.ModuloMatricula.Dominio;
+using EscolaDeCursos.WebApp.Modulos.ModuloCurso.Infraestrutura;
+using EscolaDeCursos.WebApp.Modulos.ModuloTurma.Infraestrutura;
+using EscolaDeCursos.WebApp.Modulos.ModuloMatricula.Infraestrutura;
+using WebApp.Modulos.ModuloInstrutor.Infraestrutura;
+using WebApp.Modulos.ModuloAluno.Infraestrutura;
 
 namespace EscolaDeCursos.WebApp.Compartilhado.Infraestrutura;
 
@@ -31,7 +39,11 @@ public static class InjecaoDependencia
             options.UseSqlServer(connectionString);
         });
 
-        services.AddScoped<IRepositorioInstrutor, RepositorioInstrutorEmArquivo>();
-        services.AddScoped<IRepositorioAluno, RepositorioAlunoEmArquivo>();
+        services.AddScoped<IRepositorioInstrutor, RepositorioInstrutorEmOrm>();
+        services.AddScoped<IRepositorioAluno, RepositorioAlunoEmOrm>();        
+        services.AddScoped<IRepositorioCurso, RepositorioCursoEmOrm>();
+        services.AddScoped<IRepositorioAula, RepositorioAulaEmOrm>();
+        services.AddScoped<IRepositorioTurma, RepositorioTurmaEmOrm>();
+        services.AddScoped<IRepositorioMatricula, RepositorioMatriculaEmOrm>();
     }
 }

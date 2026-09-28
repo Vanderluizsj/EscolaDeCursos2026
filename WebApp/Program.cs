@@ -1,5 +1,7 @@
 using EscolaDeCursos.WebApp.Compartilhado.Apresentacao;
 using EscolaDeCursos.WebApp.Compartilhado.Infraestrutura;
+using EscolaDeCursos.WebApp.Compartilhado.Infraestrutura.Orm;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,16 @@ builder.Services.AddInfraRepositories(builder.Configuration);
 builder.Services.AddPresentationConfig();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+
+    var dbContext = scope.ServiceProvider.GetRequiredService<ContextoDb>();
+
+    if (dbContext.Database.IsSqlServer())
+        dbContext.Database.Migrate();
+}
 
 // Middlewares de roteamento
 app.UseRouting();
