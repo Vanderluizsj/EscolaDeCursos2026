@@ -4,6 +4,7 @@ using EscolaDeCursos.WebApp.Compartilhado.Infraestrutura.Orm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EscolaDeCursos.WebApp.Migrations
 {
     [DbContext(typeof(ContextoDb))]
-    partial class ContextoDbModelSnapshot : ModelSnapshot
+    [Migration("20260928175208_Add_TBAula e Add_TBCurso")]
+    partial class Add_TBAulaeAdd_TBCurso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
