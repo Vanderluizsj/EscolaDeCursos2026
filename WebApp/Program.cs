@@ -20,6 +20,8 @@ if (app.Environment.IsDevelopment())
     if (dbContext.Database.IsSqlServer())
         dbContext.Database.Migrate();
 }
+// Acesso aos arquivos CSS e JS dentro da wwwroot
+app.UseStaticFiles();
 
 // Middlewares de roteamento
 app.UseRouting();
