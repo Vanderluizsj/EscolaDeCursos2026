@@ -20,13 +20,6 @@ public static class InjecaoDependencia
 {
     public static void AddInfraRepositories(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<ContextoJson>(_ =>
-        {
-            ContextoJson contexto = new();
-            contexto.Carregar();
-            return contexto;
-        });
-
         //Config persistencia em DB
         services.AddDbContext<ContextoDb>(options =>
         {
@@ -36,7 +29,10 @@ public static class InjecaoDependencia
             {
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             }
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString, config =>
+            {
+                config.EnableRetryOnFailure(3); //Latencia de rede, falha temporária, etc. (retries)
+            });
         });
 
         services.AddScoped<IRepositorioInstrutor, RepositorioInstrutorEmOrm>();
