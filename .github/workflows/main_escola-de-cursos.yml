@@ -91,6 +91,16 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D97F32DBD5ED4077BE471712651DE132 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_DD463D6234024C098CA0A9A8096B479C }}
 
+      - name: Configure Azure Web App settings
+        shell: pwsh
+        run: |
+         az webapp config appsettings set `
+            --name escola-de-cursos `
+            --resource-group escola-de-cursos-back `
+            --settings `
+              "ConnectionStrings__SqlServer=${{ secrets.SQLSERVER_CONNECTIONSTRING }}"
+
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
