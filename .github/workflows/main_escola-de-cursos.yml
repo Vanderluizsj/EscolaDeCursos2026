@@ -50,7 +50,7 @@ jobs:
           dotnet-version: '10.x'
         
       - name: Restore dependencies
-        run: dotnet restore ./src/EscolaDeCursos.Infrastructure/EscolaDeCursos.Infrastructure.csproj
+        run: dotnet restore WebApp/EscolaDeCursos.WebApp.csproj
 
       - name: Install Entity Framework Core tools
         run: dotnet tool install --global dotnet-ef
