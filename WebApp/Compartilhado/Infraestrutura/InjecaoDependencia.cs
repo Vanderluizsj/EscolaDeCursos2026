@@ -23,11 +23,11 @@ public static class InjecaoDependencia
         //Config persistencia em DB
         services.AddDbContext<ContextoDb>(options =>
         {
-            string? connectionString = configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("SqlServer");
 
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+                throw new InvalidOperationException("Connection string 'SqlServer' not found.");
             }
             options.UseSqlServer(connectionString, config =>
             {
